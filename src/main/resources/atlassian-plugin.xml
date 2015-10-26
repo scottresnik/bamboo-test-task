@@ -1,0 +1,30 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="dynamic-task" />
+
+  <!-- add our web resources -->
+  <web-resource key="dynamic-task-resources" name="dynamic-task Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+
+    <resource type="download" name="dynamic-task.css" location="/css/dynamic-task.css" />
+    <resource type="download" name="dynamic-task.js" location="/js/dynamic-task.js" />
+    <resource type="download" name="images/" location="/images" />
+
+    <context>dynamic-task</context>
+  </web-resource>
+  <resource type="i18n" name="Test task language" location="english" />
+  <taskType key="testTask" name="Test Task" class="testTask.TestTask">
+    <description>A task that prints 'Hello, World!'</description>
+    <configuration class="testTask.TestTaskConfigurator" />
+    <resource type="freemarker" name="edit" location="testTaskEdit.ftl" />
+    <resource type="freemarker" name="view" location="testTaskView.ftl" />
+  </taskType>
+</atlassian-plugin>

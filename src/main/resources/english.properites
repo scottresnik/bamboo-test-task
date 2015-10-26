@@ -1,0 +1,2 @@
+testtask.say=What to Say
+testtask.say.error=Say must be specified.
