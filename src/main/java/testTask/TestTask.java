@@ -1,10 +1,3 @@
-/*
- *  Copyright (C) 2001-2015 Vestmark, Inc. All rights reserved.
- *  THIS PROGRAM IS AN UNPUBLISHED WORK AND IS CONSIDERED A TRADE SECRET AND
- *  CONFIDENTIAL INFORMATION BELONGING TO VESTMARK, INC.
- *  ANY UNAUTHORIZED USE IS STRICTLY PROHIBITED.
- */
-
 package testTask;
 
 import com.atlassian.bamboo.build.logger.BuildLogger;
