@@ -3,19 +3,22 @@ package testTask;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.atlassian.bamboo.collections.ActionParametersMap;
-import com.atlassian.bamboo.task.AbstractTaskConfigurator;
+import com.atlassian.bamboo.task.TaskConfigurator;
 import com.atlassian.bamboo.task.TaskDefinition;
 import com.atlassian.bamboo.utils.error.ErrorCollection;
 import com.atlassian.struts.TextProvider;
+import com.google.common.collect.Maps;
 
 /**
  * @author scott
  *
  */
 public class TestTaskConfigurator
-    extends AbstractTaskConfigurator
+    implements TaskConfigurator
 {
 
   private TextProvider textProvider;
@@ -49,7 +52,6 @@ public class TestTaskConfigurator
   @Override
   public void populateContextForCreate(Map<String, Object> context)
   {
-    super.populateContextForCreate(context);
     context.put("say", "Hello World!");
   }
 
@@ -59,7 +61,6 @@ public class TestTaskConfigurator
   @Override
   public void populateContextForEdit(Map<String, Object> context, TaskDefinition taskDefinition)
   {
-    super.populateContextForEdit(context, taskDefinition);
     context.put("say", taskDefinition.getConfiguration().get("say"));
   }
 
@@ -69,7 +70,6 @@ public class TestTaskConfigurator
   @Override
   public void populateContextForView(Map<String, Object> context, TaskDefinition taskDefinition)
   {
-    super.populateContextForView(context, taskDefinition);
     context.put("say", taskDefinition.getConfiguration().get("say"));
   }
 
@@ -79,11 +79,20 @@ public class TestTaskConfigurator
   @Override
   public void validate(ActionParametersMap params, ErrorCollection errorCollection)
   {
-    super.validate(params, errorCollection);
-
     final String sayValue = params.getString("say");
     if (StringUtils.isEmpty(sayValue)) {
       errorCollection.addError("say", textProvider.getText("testtask.say.error"));
     }
+  }
+
+  /**
+   * @see com.atlassian.bamboo.task.TaskConfigurator#generateTaskConfigMap(com.atlassian.bamboo.collections.ActionParametersMap, com.atlassian.bamboo.task.TaskDefinition)
+   */
+  @Override
+  public Map<String, String> generateTaskConfigMap(@NotNull
+  final ActionParametersMap params, @Nullable
+  final TaskDefinition previousTaskDefinition)
+  {
+    return Maps.newHashMap();
   }
 }
