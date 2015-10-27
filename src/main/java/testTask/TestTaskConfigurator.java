@@ -8,7 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import com.atlassian.bamboo.collections.ActionParametersMap;
 import com.atlassian.bamboo.task.TaskConfigurator;
+import com.atlassian.bamboo.task.TaskConfiguratorHelper;
 import com.atlassian.bamboo.task.TaskDefinition;
+import com.atlassian.bamboo.user.BambooAuthenticationContext;
 import com.atlassian.bamboo.utils.error.ErrorCollection;
 import com.atlassian.struts.TextProvider;
 import com.google.common.collect.Maps;
@@ -22,6 +24,8 @@ public class TestTaskConfigurator
 {
 
   private TextProvider textProvider;
+  protected TaskConfiguratorHelper taskConfiguratorHelper;
+  protected BambooAuthenticationContext bambooAuthenticationContext;
 
   /**
    * 
@@ -93,6 +97,18 @@ public class TestTaskConfigurator
   final ActionParametersMap params, @Nullable
   final TaskDefinition previousTaskDefinition)
   {
-    return Maps.newHashMap();
+    Map<String, String> retVal = Maps.newHashMap();
+    retVal.put("say", params.getString("say"));
+    return retVal;
+  }
+
+  public void setTaskConfiguratorHelper(TaskConfiguratorHelper taskConfiguratorHelper)
+  {
+    this.taskConfiguratorHelper = taskConfiguratorHelper;
+  }
+
+  public void setAuthenticationContext(BambooAuthenticationContext bambooAuthenticationContext)
+  {
+    this.bambooAuthenticationContext = bambooAuthenticationContext;
   }
 }
