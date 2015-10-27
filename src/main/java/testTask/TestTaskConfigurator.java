@@ -8,7 +8,7 @@ import com.atlassian.bamboo.collections.ActionParametersMap;
 import com.atlassian.bamboo.task.AbstractTaskConfigurator;
 import com.atlassian.bamboo.task.TaskDefinition;
 import com.atlassian.bamboo.utils.error.ErrorCollection;
-import com.opensymphony.xwork2.TextProvider;
+import com.atlassian.struts.TextProvider;
 
 /**
  * @author scott
